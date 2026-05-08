@@ -1,0 +1,4 @@
+We are hiring a Python automation engineer to build internal workflow tools.
+The ideal candidate has experience with FastAPI, PostgreSQL, data pipelines,
+scheduled jobs, GitHub Actions, observability, and clear technical documentation.
+This role works closely with product managers and business operations teams.

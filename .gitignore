@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+output/*.aux
+output/*.fdb_latexmk
+output/*.fls
+output/*.log
+output/*.out
+output/*.synctex.gz

@@ -1,0 +1,221 @@
+{
+  "name": "Jordan Lee",
+  "headline": "Python Automation Engineer",
+  "contact": [
+    "jordan.lee@example.com",
+    "555-010-3490",
+    "github.com/jordanlee",
+    "linkedin.com/in/jordanlee"
+  ],
+  "summary": "Python backend engineer with experience building automation scripts, FastAPI services, scheduled ETL jobs, internal workflow tools, observability dashboards, and technical documentation for product and operations stakeholders.",
+  "skills": [
+    {
+      "group": "Languages & APIs",
+      "items": [
+        "Python",
+        "FastAPI",
+        "REST APIs",
+        "SQL"
+      ]
+    },
+    {
+      "group": "Data & Storage",
+      "items": [
+        "PostgreSQL",
+        "Redis",
+        "ETL",
+        "data pipelines",
+        "data quality checks",
+        "scheduled jobs"
+      ]
+    },
+    {
+      "group": "DevOps & Reliability",
+      "items": [
+        "Docker",
+        "GitHub Actions",
+        "CI checks",
+        "deployment scripts",
+        "structured logging",
+        "metrics dashboards",
+        "alerting",
+        "on-call runbooks"
+      ]
+    },
+    {
+      "group": "Collaboration & Documentation",
+      "items": [
+        "technical requirements",
+        "delivery milestones",
+        "technical documentation",
+        "API documentation",
+        "support workflow documentation"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Northstar Systems",
+      "title": "Backend Engineer",
+      "location": "Remote",
+      "dates": "2022-Present",
+      "bullets": [
+        "Built Python automation scripts that reduced weekly reporting time from 5 hours to 20 minutes for internal teams.",
+        "Designed internal workflow tools and REST APIs using FastAPI, PostgreSQL, and Redis.",
+        "Migrated manual spreadsheet processes into scheduled ETL jobs with validation, alerting, and clearer handoffs.",
+        "Created GitHub Actions CI checks and deployment scripts for a small engineering team.",
+        "Partnered with product managers to define technical requirements, milestones, and delivery scope.",
+        "Improved observability with structured logging, metrics dashboards, and on-call runbooks."
+      ]
+    },
+    {
+      "company": "LedgerPeak",
+      "title": "Software Engineer",
+      "location": "New York, NY",
+      "dates": "2019-2022",
+      "bullets": [
+        "Maintained Python services that processed customer account updates and billing events.",
+        "Wrote SQL queries and data quality checks for operations dashboards.",
+        "Documented API behavior, deployment steps, and common support workflows."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Workflow Rules Engine",
+      "description": "Python rules engine for routing operational tasks based on account attributes and service requirements.",
+      "bullets": [
+        "Built routing logic based on account status, SLA, and customer tier to support internal workflow automation.",
+        "Added validation reports that helped non-engineering teams identify incomplete records before handoff."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Rutgers University",
+      "credential": "BS Computer Science",
+      "location": "",
+      "dates": "2019"
+    }
+  ],
+  "keyword_report": {
+    "matched_keywords": [
+      "Python automation",
+      "internal workflow tools",
+      "FastAPI",
+      "PostgreSQL",
+      "data pipelines",
+      "scheduled jobs",
+      "GitHub Actions",
+      "observability",
+      "technical documentation",
+      "product managers",
+      "business operations",
+      "REST APIs",
+      "ETL",
+      "validation",
+      "alerting",
+      "structured logging",
+      "metrics dashboards"
+    ],
+    "missing_keywords": [],
+    "tailoring_notes": [
+      "Positioned Python automation, internal workflow tools, FastAPI, PostgreSQL, scheduled ETL jobs, GitHub Actions, observability, and documentation near the top because they map directly to the job description.",
+      "Rewrote dense implementation bullets into direct resume language while preserving the original tools, scope, and metrics.",
+      "Kept collaboration with product managers and operations-facing work because the source resume supports both through requirements work, operations dashboards, and non-engineering handoffs.",
+      "Avoided adding unsupported tools, certifications, cloud platforms, or business-domain claims."
+    ]
+  },
+  "decisions": [
+    {
+      "decision": "REWRITE",
+      "source": "Backend Engineer headline",
+      "reason": "Aligns the headline with the target role while preserving the candidate's backend engineering background.",
+      "after": "Python Automation Engineer"
+    },
+    {
+      "decision": "REWRITE",
+      "source": "Python engineer focused on automation, data pipelines, internal workflow tools, and reliable developer platforms.",
+      "reason": "Adds the most relevant job-description terms while staying supported by the resume.",
+      "after": "Python backend engineer with experience building automation scripts, FastAPI services, scheduled ETL jobs, internal workflow tools, observability dashboards, and technical documentation for product and operations stakeholders."
+    },
+    {
+      "decision": "REWRITE",
+      "source": "Python, FastAPI, PostgreSQL, Redis, Docker, GitHub Actions, SQL, ETL, scheduled jobs, REST APIs, structured logging, metrics dashboards, technical documentation",
+      "reason": "Grouped skills by hiring signal so ATS terms and recruiter-relevant capabilities are easier to scan.",
+      "after": "Grouped skills into Languages & APIs, Data & Storage, DevOps & Reliability, and Collaboration & Documentation."
+    },
+    {
+      "decision": "REWRITE",
+      "source": "Built Python automation scripts that reduced weekly reporting time from 5 hours to 20 minutes.",
+      "reason": "Keeps the strongest metric and clarifies that the automation served internal teams, matching the role's workflow focus.",
+      "after": "Built Python automation scripts that reduced weekly reporting time from 5 hours to 20 minutes for internal teams."
+    },
+    {
+      "decision": "REWRITE",
+      "source": "Designed REST APIs with FastAPI, PostgreSQL, and Redis for internal business workflows.",
+      "reason": "Moves internal workflow tools earlier and keeps exact supported technologies from the job description.",
+      "after": "Designed internal workflow tools and REST APIs using FastAPI, PostgreSQL, and Redis."
+    },
+    {
+      "decision": "KEEP",
+      "source": "Created CI checks and deployment scripts for a small engineering team using GitHub Actions.",
+      "reason": "Directly supports the GitHub Actions requirement and shows practical automation around delivery.",
+      "after": "Created GitHub Actions CI checks and deployment scripts for a small engineering team."
+    },
+    {
+      "decision": "REWRITE",
+      "source": "Migrated manual spreadsheet processes into scheduled ETL jobs with validation and alerting.",
+      "reason": "Strengthens alignment with data pipelines, scheduled jobs, validation, and operations handoffs without adding unsupported scope.",
+      "after": "Migrated manual spreadsheet processes into scheduled ETL jobs with validation, alerting, and clearer handoffs."
+    },
+    {
+      "decision": "KEEP",
+      "source": "Partnered with product managers to define technical requirements and delivery milestones.",
+      "reason": "Direct match for working closely with product managers.",
+      "after": "Partnered with product managers to define technical requirements, milestones, and delivery scope."
+    },
+    {
+      "decision": "KEEP",
+      "source": "Improved observability with structured logs, metrics dashboards, and on-call runbooks.",
+      "reason": "Direct match for observability and reliability-related responsibilities.",
+      "after": "Improved observability with structured logging, metrics dashboards, and on-call runbooks."
+    },
+    {
+      "decision": "KEEP",
+      "source": "Maintained Python services that processed customer account updates and billing events.",
+      "reason": "Supports Python service experience and backend reliability, though less central than the Northstar automation work.",
+      "after": "Maintained Python services that processed customer account updates and billing events."
+    },
+    {
+      "decision": "KEEP",
+      "source": "Wrote SQL queries and data quality checks for operations dashboards.",
+      "reason": "Supports SQL, data quality, and operations-facing work relevant to internal tools.",
+      "after": "Wrote SQL queries and data quality checks for operations dashboards."
+    },
+    {
+      "decision": "REWRITE",
+      "source": "Documented API behavior, deployment steps, and common support workflows.",
+      "reason": "Highlights clear technical documentation, a stated requirement in the job description.",
+      "after": "Documented API behavior, deployment steps, and common support workflows."
+    },
+    {
+      "decision": "COMBINE",
+      "source": "Workflow Rules Engine project description and bullet about routing operational tasks based on account status, SLA, and customer tier.",
+      "reason": "Combines repeated project context into a concise project description and one implementation bullet focused on workflow automation.",
+      "after": "Python rules engine for routing operational tasks based on account attributes and service requirements. Built routing logic based on account status, SLA, and customer tier to support internal workflow automation."
+    },
+    {
+      "decision": "KEEP",
+      "source": "Added validation reports that helped non-engineering teams find incomplete records before handoff.",
+      "reason": "Supports collaboration with operations or non-engineering stakeholders and reinforces validation experience.",
+      "after": "Added validation reports that helped non-engineering teams identify incomplete records before handoff."
+    },
+    {
+      "decision": "KEEP",
+      "source": "BS Computer Science, Rutgers University, 2019",
+      "reason": "Preserves the candidate's real degree, school, and graduation year.",
+      "after": "BS Computer Science, Rutgers University, 2019"
+    }
+  ]
+}

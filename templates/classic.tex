@@ -1,0 +1,32 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.55in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.15em, topsep=2pt, itemsep=1pt}
+\titleformat{\section}{\large\bfseries\color{black}}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{6pt}{4pt}
+
+\newcommand{\resumeEntry}[4]{
+  \textbf{#1} \hfill #4\\
+  #2 \hfill #3
+}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{ {{NAME}} }}\\
+{{HEADLINE}}\\
+{{CONTACT}}
+\end{center}
+
+{{RESUME_BODY}}
+
+{{KEYWORD_REPORT_COMMENT}}
+
+\end{document}
