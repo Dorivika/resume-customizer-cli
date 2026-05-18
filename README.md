@@ -23,6 +23,7 @@ Then:
 ```bash
 resume-tailor --help
 resume-tailor tailor --help
+resume-tailor diagnose --help
 ```
 
 `--help` is intentionally non-interactive, like most CLIs: it prints usage and exits. To stay inside the app, run:
@@ -74,6 +75,12 @@ File-based run:
 
 ```bash
 resume-tailor tailor --resume samples/resume.md --job samples/job_description.txt
+```
+
+Before calling a provider, check that local files, templates, route settings, and PDF tooling are ready:
+
+```bash
+resume-tailor diagnose --resume samples/resume.md --job samples/job_description.txt
 ```
 
 Skip PDF compilation:
@@ -154,6 +161,16 @@ Print the route before running:
 ```bash
 resume-tailor tailor --resume ./resume.md --show-route
 ```
+
+Run a preflight check without calling a model:
+
+```bash
+resume-tailor diagnose --resume ./resume.md --job ./job.txt --route openrouter-free,gemini
+resume-tailor diagnose --resume ./resume.md --job ./job.txt --strict
+resume-tailor diagnose --resume ./resume.md --job ./job.txt --require-pdf --strict
+```
+
+`diagnose` verifies readable input files, template resolution, output directory readiness, available LaTeX engines, provider route syntax, and which provider keys are configured.
 
 ## Environment
 
