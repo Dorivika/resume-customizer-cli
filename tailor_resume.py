@@ -677,6 +677,101 @@ def key_status_table(env_path: Path) -> None:
     CONSOLE.print(table)
 
 
+def find_latex_engine(engine: str | None) -> str | None:
+    candidates = [engine] if engine else ["tectonic", "latexmk", "pdflatex", "xelatex", "lualatex"]
+    return next((candidate for candidate in candidates if candidate and shutil.which(candidate)), None)
+
+
+def diagnostic_status_table(title: str, rows: list[tuple[str, bool, str]]) -> bool:
+    table = Table(title=title)
+    table.add_column("Check", style="cyan")
+    table.add_column("Status")
+    table.add_column("Detail", overflow="fold")
+    passed = True
+    for name, ok, detail in rows:
+        passed = passed and ok
+        table.add_row(name, "[green]ok[/green]" if ok else "[red]fail[/red]", detail)
+    CONSOLE.print(table)
+    return passed
+
+
+def diagnose_document(label: str, path: Path | None, required: bool) -> tuple[str, bool, str]:
+    if path is None:
+        return label, not required, "not provided" if not required else "required path was not provided"
+    try:
+        text = read_document_text(path)
+    except Exception as exc:
+        return label, False, str(exc)
+    word_count = len(re.findall(r"\S+", text))
+    return label, True, f"{path} ({word_count} words)"
+
+
+def diagnose_route_config(route: str, openrouter_api_key_env: str) -> list[tuple[str, bool, str]]:
+    rows: list[tuple[str, bool, str]] = []
+    try:
+        providers = parse_route(route)
+        rows.append(("route syntax", True, " -> ".join(providers)))
+    except ValueError as exc:
+        return [("route syntax", False, str(exc))]
+
+    for provider in providers:
+        if provider == "openrouter-free":
+            key_name = openrouter_api_key_env
+        elif provider == "gemini":
+            key_name = "GEMINI_API_KEY or GOOGLE_API_KEY"
+        else:
+            key_name = "OPENAI_API_KEY"
+        configured = provider_has_key(provider, openrouter_api_key_env)
+        rows.append((f"{provider} key", configured, "configured" if configured else f"missing {key_name}"))
+    return rows
+
+
+@app.command("diagnose")
+def diagnose(
+    resume: Path | None = typer.Option(None, "--resume", help="Path to a resume to verify."),
+    job: Path | None = typer.Option(None, "--job", help="Path to a job description to verify."),
+    env: Path = typer.Option(Path(".env"), "--env", help="Optional .env path."),
+    route: str = typer.Option(DEFAULT_ROUTE, "--route", help="Comma-separated provider route."),
+    openrouter_api_key_env: str = typer.Option("OPENROUTER_API_KEY", "--openrouter-api-key-env", help="Environment variable containing the OpenRouter key."),
+    template: str = typer.Option("classic", "--template", help="Template name from templates/ or a path to a .tex file."),
+    template_dir: Path = typer.Option(DEFAULT_TEMPLATE_DIR, "--template-dir", help="Template directory."),
+    output_dir: Path = typer.Option(Path("output"), "--output-dir", help="Output directory to check."),
+    latex_engine: str | None = typer.Option(None, "--latex-engine", help="Preferred LaTeX engine to check."),
+    require_pdf: bool = typer.Option(False, "--require-pdf", help="Fail diagnostics when no PDF engine is available."),
+    strict: bool = typer.Option(False, "--strict/--no-strict", help="Exit non-zero when any check fails."),
+) -> None:
+    load_dotenv(env)
+    if route == DEFAULT_ROUTE:
+        route = os.environ.get("RESUME_TAILOR_ROUTE", route)
+
+    rows = [
+        diagnose_document("resume input", resume, required=resume is not None),
+        diagnose_document("job description", job, required=job is not None),
+    ]
+    try:
+        selected_template = template_path(template, template_dir)
+        rows.append(("template", True, str(selected_template)))
+    except FileNotFoundError as exc:
+        rows.append(("template", False, str(exc)))
+
+    output_parent = output_dir.resolve().parent
+    rows.append(("output directory", output_parent.exists(), f"parent exists: {output_parent}"))
+
+    selected_engine = find_latex_engine(latex_engine)
+    rows.append(
+        (
+            "PDF engine",
+            selected_engine is not None or not require_pdf,
+            selected_engine or "not found; LaTeX output can still be generated",
+        )
+    )
+
+    ok = diagnostic_status_table("Local Inputs", rows)
+    route_ok = diagnostic_status_table("Provider Route", diagnose_route_config(route, openrouter_api_key_env))
+    if strict and not (ok and route_ok):
+        raise RuntimeError("Diagnostics failed.")
+
+
 def setup_wizard(env_path: Path = Path(".env"), force: bool = False) -> bool:
     load_dotenv(env_path)
     if has_any_provider_key(env_path) and not force:
@@ -716,8 +811,7 @@ def setup_wizard(env_path: Path = Path(".env"), force: bool = False) -> bool:
 
 
 def compile_pdf(tex_file: Path, output_dir: Path, engine: str | None, require_pdf: bool) -> Path | None:
-    candidates = [engine] if engine else ["tectonic", "latexmk", "pdflatex", "xelatex", "lualatex"]
-    selected = next((candidate for candidate in candidates if candidate and shutil.which(candidate)), None)
+    selected = find_latex_engine(engine)
     if not selected:
         message = "No LaTeX engine found. Install Tectonic, TeX Live, or MiKTeX to compile PDF."
         if require_pdf:
@@ -1003,6 +1097,7 @@ def help_panel() -> None:
     table.add_column("Command", style="cyan")
     table.add_column("What it does")
     table.add_row("tailor", "Tailor a resume to a pasted or file-based job description.")
+    table.add_row("diagnose", "Check local inputs, template, provider route, and PDF tooling.")
     table.add_row("templates", "List available LaTeX templates.")
     table.add_row("import-template", "Import a .tex template or create a best-effort template from a PDF.")
     table.add_row("quit", "Exit the interactive shell.")
@@ -1102,7 +1197,7 @@ def interactive() -> None:
 
 
 def main() -> None:
-    commands = {"tailor", "import-template", "templates", "interactive", "setup"}
+    commands = {"tailor", "diagnose", "import-template", "templates", "interactive", "setup"}
     argv = sys.argv[1:]
     if not argv:
         interactive()
